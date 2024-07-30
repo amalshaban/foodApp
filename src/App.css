@@ -1,0 +1,19 @@
+.containerImg{
+    background-image: url('../../FoodApp/src/assets/imgs/authBg.png');
+    background-size: cover;
+}
+.bg-overlay{
+    background: linear-gradient(51.22deg, rgba(47, 140, 96, 0.63) -22.39%, rgba(0, 0, 0, 0.6237) 61.76%);
+
+    
+}
+.reg{
+    color: #3A3A3D;
+text-decoration: none;
+
+}
+.forgot{
+    color: #4AA35A;
+
+    text-decoration: none;
+}

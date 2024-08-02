@@ -6,12 +6,12 @@ import Header from '../Header/Header'
 
 export default function MasterLayout() {
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-md-3 bg-success">
+    <div className="100vh">
+      <div className="d-flex">
+        <div className="">
           <SideBar/>
         </div>
-        <div className="col-md-9 bg-warning">
+        <div className="w-100">
           <NavBar/>
           <Header/>
           <Outlet/>

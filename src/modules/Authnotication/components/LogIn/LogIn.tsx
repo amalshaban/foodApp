@@ -1,13 +1,13 @@
-import React from 'react'
+import { useContext } from 'react'
 import logo from '../../../../assets/imgs/44.png'
 import { useForm } from 'react-hook-form'
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-
-
+import { AuthContext } from '../context/AuthContext.tsx';
 
 export default function LogIn() {
+ let { saveLoginData } = useContext(AuthContext);
 
 let navigate= useNavigate();
   let{
@@ -19,12 +19,15 @@ let navigate= useNavigate();
   let onSubmit = async (data:any)=>{
     try {
       let response = await axios.post('https://upskilling-egypt.com:3006/api/v1/Users/Login', data);
-      console.log(response);
-      toast.success('congratulations, login success');
+      
+      localStorage.setItem('token', response.data.token);
+      saveLoginData();
+      toast.success(`congratulations, login success`);
       navigate('/dashboard');
+    
       } 
       catch (error:any) {
-      toast.error(error.response.data.message);
+      toast.error(error?.response?.data?.message);
       console.log(error);
       
     }
@@ -77,3 +80,7 @@ let navigate= useNavigate();
 </div>  
 )
 }
+function saveLoginData() {
+  throw new Error('Function not implemented.');
+}
+

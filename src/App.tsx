@@ -4,16 +4,18 @@ import './App.css'
 import AuthLayout from './modules/shared/components/AuthLayout/AuthLayout'
 import NotFound from './modules/shared/components/NotFound/NotFound'
 import LogIn from './modules/Authnotication/components/LogIn/LogIn'
-import ChangePass from './modules/Authnotication/components/ChangePass/ChangePass'
 import ForgetPass from './modules/Authnotication/components/ForgetPass/ForgetPass'
 import ResetPass from './modules/Authnotication/components/ResetPass/ResetPass'
 import MasterLayout from './modules/shared/components/MasterLayout/MasterLayout'
 import RecipiesList from './modules/Recipies/components/RecipiesList/RecipiesList'
 import Home from './modules/Recipies/components/Home/Home'
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Register from './modules/Authnotication/components/Register/Register'
-
+import AuthContextProvider from './modules/Authnotication/components/context/AuthContext'
+import ProtectedRoute from './modules/Authnotication/components/ProtectedRoute/ProtectedRoute'
+import UsersList from './modules/Users/components/UsersList/UsersList'
+import Categories from './modules/Categories/Categories'
 
 function App() {
 const routes = createBrowserRouter([
@@ -22,30 +24,37 @@ const routes = createBrowserRouter([
       element:<AuthLayout/>,
       errorElement:<NotFound/>,
       children:[
-        {index:"true", element: <LogIn/>},
+        {index:true, element: <LogIn/>},
         {path:'login', element: <LogIn/>},
         {path:'forgetpass', element: <ForgetPass/>},
-        {path:'changepass', element: <ChangePass/>},
         {path:'resetpass', element: <ResetPass/>},
         {path: 'register' , element:<Register/>}
       ]
   },
   {
     path:'dashboard',
-    element:<MasterLayout/>,
+   
+    element:
+     <ProtectedRoute loginData >
+           <MasterLayout/>
+      </ProtectedRoute>,
     errorElement:<NotFound/>,
     children:[
-      {index:"true", element: <Home/>},
+      {index:true, element: <Home/>},
       {path:'home', element: <Home/>},
       {path:'recipieslist', element: <RecipiesList/>},
+      {path:'userslist', element: <UsersList/>},
+      {path:'categories', element: <Categories/>},
     ]
   }
 ])
 
   return (
   <>
+  
   <ToastContainer/>
   <RouterProvider router={routes}/>
+
   </>
   )
 }

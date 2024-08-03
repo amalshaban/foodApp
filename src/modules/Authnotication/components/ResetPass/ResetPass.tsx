@@ -1,6 +1,6 @@
 import React from 'react'
 import logo from '../../../../assets/imgs/44.png'
-import { useForm } from 'react-hook-form'
+import { get, useForm } from 'react-hook-form'
 import axios from 'axios';
 import {  useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -10,6 +10,7 @@ export default function ResetPass() {
 let navigate= useNavigate();
 let{
   register,
+
   handleSubmit,
   formState:{errors},
 } = useForm();

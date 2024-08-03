@@ -36,12 +36,28 @@ text-decoration: none;
 .sidebarcontainer .ps-menu-label, .ps-menu-icon{
     color: white;
 }
-.sidebarcontainer .firstchild .ps-menu-button:hover{
+.sidebarcontainer .firstchild:hover{
 background-color: transparent !important;
 }
 
+.sidebarcontainer .css-1t8x7v1 >.ps-menu-button:hover{
+    background-color: transparent !important;
+}
 
-
-.navbarcontainer img, span, a, .nav-link{
+/* .navbarcontainer img, span, a, .nav-link{
     display: inline !important;
+} */
+
+
+
+.not-found-bg{
+    height: 100vh;
+    background-image: url('../src/assets/imgs/Group48101676.png');
+    background-repeat: no-repeat;
+    background-position: right;
+}
+.not-found-vector-bg{
+    background-image: url('../src//assets//imgs/Vector.png');
+    background-repeat: no-repeat;
+    background-position: right;
 }

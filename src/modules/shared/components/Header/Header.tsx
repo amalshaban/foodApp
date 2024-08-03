@@ -1,9 +1,10 @@
 import React from 'react'
 export default function Header({title, discribtion , imgurl}) {
   return (
-    <div className="container-fluid headerbg width-75 p-5">
-      <div className="row">
-        <div className="col-md-6 align-items-center">
+    <div className=" headercontainer mx-auto">
+    <div className="container headerbg p-5">
+      <div className="row d-flex align-items-center">
+        <div className="col-md-6">
           <h2>{title}</h2>
           <p>{discribtion}</p>
         </div>
@@ -13,6 +14,7 @@ export default function Header({title, discribtion , imgurl}) {
           </div>
         </div>
       </div>
+    </div>
     </div>
   )
 }

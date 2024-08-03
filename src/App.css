@@ -65,9 +65,14 @@ background-color: transparent !important;
 
 
 
-
+.headercontainer{
+   margin-top: 2rem;
+    width: 95%;
+    color: white;
+}
 .headerbg{
     background-image: url('./assets//imgs/header-bg.svg');
     background-color: rgba(0, 146, 71, 1);
-
+    border-radius: 20px;
+  
 }

@@ -61,3 +61,13 @@ background-color: transparent !important;
     background-repeat: no-repeat;
     background-position: right;
 }
+
+
+
+
+
+.headerbg{
+    background-image: url('./assets//imgs/header-bg.svg');
+    background-color: rgba(0, 146, 71, 1);
+
+}

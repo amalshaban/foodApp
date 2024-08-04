@@ -1,5 +1,8 @@
 import React from 'react'
 import logo from '../../../../assets/imgs/44.png'
+import { Link } from 'react-router-dom'
+
+
 export default function NotFound() {
   return (
     <div className="pt-3 ps-5 not-found-vector-bg">
@@ -9,7 +12,7 @@ export default function NotFound() {
           <h4 className='text-success'>Page  not found </h4>
           <p>This Page doesn’t exist or was removed!
           We suggest you  back to home.</p>
-          <button className='btn btn-success p-3'>Back to Home</button>
+          <Link to='/dashboard/home' className='btn btn-success p-3'>Back to Home</Link>
       </div>
     </div>
   )

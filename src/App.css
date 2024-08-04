@@ -61,7 +61,12 @@ background-color: transparent !important;
     background-repeat: no-repeat;
     background-position: right;
 }
-
+@media (max-width: 768px) {
+    .not-found-bg
+    {
+        background-image: none;
+    }
+  }
 
 
 

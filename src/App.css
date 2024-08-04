@@ -43,7 +43,9 @@ background-color: transparent !important;
 .sidebarcontainer .css-1t8x7v1 >.ps-menu-button:hover{
     background-color: transparent !important;
 }
-
+.active {
+    background-color: #4AA35A;
+}
 /* .navbarcontainer img, span, a, .nav-link{
     display: inline !important;
 } */

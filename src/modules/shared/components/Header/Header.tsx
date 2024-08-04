@@ -2,7 +2,7 @@ import React from 'react'
 export default function Header({title, discribtion , imgurl}) {
   return (
     <div className=" headercontainer mx-auto">
-    <div className="container headerbg p-5">
+    <div className="container headerbg px-5 py-1">
       <div className="row d-flex align-items-center">
         <div className="col-md-6">
           <h2>{title}</h2>

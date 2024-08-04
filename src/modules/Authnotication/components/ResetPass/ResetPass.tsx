@@ -1,4 +1,4 @@
-import React from 'react'
+import  {useState}  from 'react'
 import logo from '../../../../assets/imgs/44.png'
 import { get, useForm } from 'react-hook-form'
 import axios from 'axios';
@@ -7,10 +7,11 @@ import { toast } from 'react-toastify';
 
 export default function ResetPass() {
    
+const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 let navigate= useNavigate();
 let{
   register,
-
+  getValues,
   handleSubmit,
   formState:{errors},
 } = useForm();
@@ -68,26 +69,43 @@ let onSubmit = async (data:any)=>{
        
           <div className="input-group mb-3">
             <span className="input-group-text" id="basic-addon1"><i className="fa-solid fa-envelope"></i></span>
-            <input type="password" className="form-control" placeholder="New password"
+            <input  type={`${isPasswordVisible?"text" : "password"  }`} className="form-control" placeholder="New password"
              aria-label="password" aria-describedby="basic-addon1"
              {...register("password", {
               required: "password is required",
             
              })}
              />
+              <button
+             onMouseDown={(e)=>{e.preventDefault()}}
+             onMouseUp={(e)=>{e.preventDefault()}}
+             onClick={()=>setIsPasswordVisible((prev) => !prev)}
+              type='button'
+             className="input-group-text" id="basic-addon1">
+                <i className={`fa-solid ${isPasswordVisible?"fa-eye" : "fa-eye-slash"  }`}></i></button>
+            
           </div>
           
           {errors.password && <p className='alert alert-danger p-2'>{errors?.password?.message}</p>}
          
           <div className="input-group mb-3">
             <span className="input-group-text" id="basic-addon1"><i className="fa-solid fa-envelope"></i></span>
-            <input type="password" className="form-control" placeholder="confirm password"
+            <input  type={`${isPasswordVisible?"text" : "password"  }`} className="form-control" placeholder="confirm password"
              aria-label="password" aria-describedby="basic-addon1"
              {...register("confirmPassword", {
               required: "password is required",
-              
+              validate: (value) =>
+                 value === getValues("password") || "Password is not matched",
              })}
              />
+              <button
+             onMouseDown={(e)=>{e.preventDefault()}}
+             onMouseUp={(e)=>{e.preventDefault()}}
+             onClick={()=>setIsPasswordVisible((prev) => !prev)}
+              type='button'
+             className="input-group-text" id="basic-addon1">
+                <i className={`fa-solid ${isPasswordVisible?"fa-eye" : "fa-eye-slash"}`}></i></button>
+            
           </div>
         
           {errors.confirmPassword && <p className='alert alert-danger p-2'>{errors?.confirmPassword?.message}</p>}
@@ -101,3 +119,4 @@ let onSubmit = async (data:any)=>{
 </div>  
   )
 }
+

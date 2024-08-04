@@ -75,7 +75,7 @@ let navigate= useNavigate();
           {errors.password && <p className='alert alert-danger p-2'>{errors?.password?.message}</p>}
          
          <div className="d-flex justify-content-between mb-3">
-          <Link className='reg text-muted' to={'/register'}>Register Now?</Link>
+          <Link className='reg' to={'/register'}>Register Now?</Link>
           <Link className='forgot' to={'/forgetpass'}>Forgot Password?</Link>
          </div>
          
@@ -91,4 +91,3 @@ let navigate= useNavigate();
 function saveLoginData() {
   throw new Error('Function not implemented.');
 }
-

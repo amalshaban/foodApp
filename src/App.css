@@ -14,10 +14,14 @@ text-decoration: none;
 }
 .forgot{
     color: #4AA35A;
-
     text-decoration: none;
 }
-
+.forgot:hover{
+    color: #3A3A3D;
+}
+.reg:hover{
+    color: #4AA35A;
+}
 
 
 

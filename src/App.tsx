@@ -21,10 +21,7 @@ function App() {
 const routes = createBrowserRouter([
   {
       path:'',
-      element:<AuthLayout
-      formTitle = {"Login"}
-      formDesc = {"Welcome Back! Please enter your details"}
-      />,
+      element:<AuthLayout/>,
       errorElement:<NotFound/>,
       children:[
         {index:true, element: <LogIn/>},

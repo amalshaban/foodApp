@@ -31,14 +31,10 @@ let onSubmit = async (data:any)=>{
   }
 }
   return (
-
-    <div className="container-fluid">
-    <div className="row containerImg vh-100">
-    <div className="bg-overlay  d-flex   justify-content-center  ">
-      <div className='col-md-6 bg-white text-center align-self-center p-5 rounded-3'>
+<div className='col-md-6 bg-white text-center align-self-center p-5 rounded-3'>
       <img src={logo} className='w-50'/>
-      <h3> Reset  Password</h3>
-      <p>Please Enter Your Otp  or Check Your Inbox</p>
+      <h3 className='d-flex justify-content-start'> Reset  Password</h3>
+      <p className='d-flex justify-content-start pb-3'>Please Enter Your Otp  or Check Your Inbox</p>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="input-group mb-3">
             <span className="input-group-text" id="basic-addon1"><i className="fa-solid fa-envelope"></i></span>
@@ -108,10 +104,6 @@ let onSubmit = async (data:any)=>{
           <button className='btn btn-success w-100'>Submit</button>
         </form>
       </div>
-    </div>
- </div>
- 
-</div>  
   )
 }
 

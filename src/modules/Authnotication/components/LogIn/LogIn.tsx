@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { AuthContext } from '../context/AuthContext.tsx';
 import {USERS_URLS} from '../../../../assets/CONSTANTS/END-POINTS.ts';
 import { EMAILVALIDATION } from '../../../../assets/CONSTANTS/VALIDATIONS.ts'
-import AuthLayout from '../../../shared/components/AuthLayout/AuthLayout.tsx';
+import logo from '../../../../assets/imgs/44.png'
 
 
 export default function LogIn() {
@@ -36,7 +36,14 @@ let navigate= useNavigate();
     }
   }
   return (
-    <form  onSubmit={handleSubmit(onSubmit)}>
+ 
+
+
+<div className='col-md-6 bg-white text-center align-self-center p-5 rounded-3'>
+<img src={logo} className='w-50'/>
+<h3 className='d-flex justify-content-start'>Login</h3>
+<p className='d-flex justify-content-start pb-3'>Welcome Back! Please enter your details</p>
+<form  onSubmit={handleSubmit(onSubmit)}>
     <div className="input-group mb-3">
       <span className="input-group-text" id="basic-addon1"><i className="fa-solid fa-envelope"></i></span>
       <input type="text" className="form-control" placeholder="email"
@@ -72,9 +79,7 @@ let navigate= useNavigate();
     <button disabled={isSubmitting} className='btn btn-success w-100'>LogIn</button>
   </form>
 
-
-
-
+</div>
 )
 }
 function saveLoginData() {

@@ -1,5 +1,4 @@
 import { useContext, useState } from 'react'
-import logo from '../../../../assets/imgs/44.png'
 import { useForm } from 'react-hook-form'
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
@@ -7,6 +6,8 @@ import { toast } from 'react-toastify';
 import { AuthContext } from '../context/AuthContext.tsx';
 import {USERS_URLS} from '../../../../assets/CONSTANTS/END-POINTS.ts';
 import { EMAILVALIDATION } from '../../../../assets/CONSTANTS/VALIDATIONS.ts'
+import AuthLayout from '../../../shared/components/AuthLayout/AuthLayout.tsx';
+
 
 export default function LogIn() {
  let { saveLoginData } = useContext(AuthContext);
@@ -35,53 +36,45 @@ let navigate= useNavigate();
     }
   }
   return (
-<div className="container-fluid">
-    <div className="row containerImg vh-100">
-    <div className="bg-overlay  d-flex   justify-content-center  ">
-      <div className='col-md-6 bg-white text-center align-self-center p-5 rounded-3'>
-      <img src={logo} className='w-50'/>
-      <h3 className='d-flex justify-content-start'>Log In</h3>
-      <p className='d-flex justify-content-start pb-3'>Welcome Back! Please enter your details</p>
-        <form  onSubmit={handleSubmit(onSubmit)}>
-          <div className="input-group mb-3">
-            <span className="input-group-text" id="basic-addon1"><i className="fa-solid fa-envelope"></i></span>
-            <input type="text" className="form-control" placeholder="email"
-             aria-label="email" aria-describedby="basic-addon1"
-             {...register("email",EMAILVALIDATION)}
-             />
-          </div>
-          
-          {errors.email && <p className='alert alert-danger p-2'>{errors?.email?.message}</p>}
-          <div className="input-group">
-              <span className="input-group-text" id="basic-addon1"><i className="fa-solid fa-key"></i></span>
-            <input type={`${isPasswordVisible?"text" : "password"  }`} className="form-control" placeholder="password"
-             aria-label="password" aria-describedby="basic-addon1"
-             {...register("password", {
-              required: "Password is required",
-             })}/>
-             <button
-             onMouseDown={(e)=>{e.preventDefault()}}
-             onMouseUp={(e)=>{e.preventDefault()}}
-             onClick={()=>setIsPasswordVisible((prev) => !prev)}
-              type='button'
-             className="input-group-text" id="basic-addon1">
-                <i className={`fa-solid ${isPasswordVisible?"fa-eye" : "fa-eye-slash"  }`}></i></button>
-            
-          </div>
-          {errors.password && <p className='alert alert-danger p-2'>{errors?.password?.message}</p>}
-         
-         <div className="d-flex justify-content-between mb-3">
-          <Link className='reg' to={'/register'}>Register Now?</Link>
-          <Link className='forgot' to={'/forgetpass'}>Forgot Password?</Link>
-         </div>
-         
-          <button disabled={isSubmitting} className='btn btn-success w-100'>LogIn</button>
-        </form>
-      </div>
+    <form  onSubmit={handleSubmit(onSubmit)}>
+    <div className="input-group mb-3">
+      <span className="input-group-text" id="basic-addon1"><i className="fa-solid fa-envelope"></i></span>
+      <input type="text" className="form-control" placeholder="email"
+       aria-label="email" aria-describedby="basic-addon1"
+       {...register("email",EMAILVALIDATION)}
+       />
     </div>
- </div>
- 
-</div>  
+    
+    {errors.email && <p className='alert alert-danger p-2'>{errors?.email?.message}</p>}
+    <div className="input-group">
+        <span className="input-group-text" id="basic-addon1"><i className="fa-solid fa-key"></i></span>
+      <input type={`${isPasswordVisible?"text" : "password"  }`} className="form-control" placeholder="password"
+       aria-label="password" aria-describedby="basic-addon1"
+       {...register("password", {
+        required: "Password is required",
+       })}/>
+       <button
+       onMouseDown={(e)=>{e.preventDefault()}}
+       onMouseUp={(e)=>{e.preventDefault()}}
+       onClick={()=>setIsPasswordVisible((prev) => !prev)}
+        type='button'
+       className="input-group-text" id="basic-addon1">
+          <i className={`fa-solid ${isPasswordVisible?"fa-eye" : "fa-eye-slash"  }`}></i></button>
+      
+    </div>
+    {errors.password && <p className='alert alert-danger p-2'>{errors?.password?.message}</p>}
+   
+   <div className="d-flex justify-content-between mb-3">
+    <Link className='reg' to={'/register'}>Register Now?</Link>
+    <Link className='forgot' to={'/forgetpass'}>Forgot Password?</Link>
+   </div>
+   
+    <button disabled={isSubmitting} className='btn btn-success w-100'>LogIn</button>
+  </form>
+
+
+
+
 )
 }
 function saveLoginData() {

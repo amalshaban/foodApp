@@ -4,7 +4,8 @@ import { useForm } from 'react-hook-form'
 import axios from 'axios';
 import {  useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-
+import {USERS_URLS} from '../../../../assets/CONSTANTS/END-POINTS.ts'
+import { EMAILVALIDATION } from '../../../../assets/CONSTANTS/VALIDATIONS.ts'
 export default function Register() {
   
 let navigate= useNavigate();
@@ -16,7 +17,7 @@ let{
 
 let onSubmit = async (data:any)=>{
   try {
-    let response = await axios.post('https://upskilling-egypt.com:3006/api/v1/Users/Register', data);
+    let response = await axios.post(USERS_URLS.register, data);
     console.log(response);
     toast.success('Registeration success');
     navigate('/login');
@@ -55,13 +56,7 @@ let onSubmit = async (data:any)=>{
             <span className="input-group-text" id="basic-addon1"><i className="fa-solid fa-envelope"></i></span>
             <input type="text" className="form-control" placeholder="email"
              aria-label="email" aria-describedby="basic-addon1"
-             {...register("email", {
-              required: "Email is required",
-              pattern:{
-                value: /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/,
-                message:'Email address is not valid !'
-              }
-             })}
+             {...register("email", EMAILVALIDATION)}
              />
           </div>
           {errors.email && <p className='alert alert-danger p-2'>{errors?.email?.message}</p>}

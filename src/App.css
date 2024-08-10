@@ -94,3 +94,13 @@ background-color: transparent !important;
 .noDataImg{
     width: 200px;
 }
+
+.img-list{
+    width: 50px;
+}
+
+
+.table-secondary {
+    color: #681d1d; /* Or any desired color */
+  }
+  

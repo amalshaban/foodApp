@@ -1,4 +1,6 @@
 const BASE_URL = "https://upskilling-egypt.com:3006/api/v1";
+export const IMG_URL ="https://upskilling-egypt.com:3006/"
+
 
 export const AuthorizedToken = { headers: { Authorization: `Bearer ${localStorage.token}` } };
 

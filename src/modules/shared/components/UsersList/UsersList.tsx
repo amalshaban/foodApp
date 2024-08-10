@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Header from '../Header/Header'
-import { AuthorizedToken, CATEGORIES_URLS, USERS_URLS } from '../../../../assets/CONSTANTS/END-POINTS';
+import { AuthorizedToken, CATEGORIES_URLS, IMG_URL, USERS_URLS } from '../../../../assets/CONSTANTS/END-POINTS';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -8,6 +8,7 @@ import DeleteConfirmation from '../DeleteConfirmation/DeleteConfirmation';
 import { toast } from 'react-toastify';
 import NoData from '../NoData/NoData';
 import usersListbg from '../../../../assets/imgs/Group48102127.png'
+import nodata from '../../../../assets/imgs/nodata.png'
 
 
 export default function UsersList() {
@@ -66,28 +67,35 @@ handleClose();
     <div className="title p-4 d-flex justify-content-between">
 <div className="title-info">
       <h4 className="">Users Table Details</h4>
-      <span className="">You can check all details</span>
+      <span className="text-muted">You can check all details</span>
     </div>
-<button className='btn btn-success'>Add New User</button>
 </div>
 
 {usersList.length > 0 ? 
+<div className="table-container  p-4 d-flex justify-content-between">
 
-<table className="table p-2">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
+<table className="table table-striped">
+
+  <thead className='table-secondary pb-2'>
+    <tr className='group-header'>
       <th scope="col">Name</th>
+      <th scope="col">Image</th>
       <th scope="col">Creation Date</th>
       <th scope="col"></th>
     </tr>
   </thead>
+
+ 
   <tbody>
 {usersList.map((user)=>(
   <tr key={user.id}>
-    
-    <td>{user.id}</td>
     <td>{user.name}</td>
+   <td>
+   {user.imagePath ?( 
+        <img className='img-list' src={`${IMG_URL}${user.imagePath}`}/>
+      ):(<img className='img-list' src={nodata}/>) 
+      }
+   </td>
     <td>{user.creationDate}</td>
     
     <td>
@@ -101,6 +109,8 @@ handleClose();
 
   </tbody>
 </table>
+</div>
+
 
 :<NoData/>}
 

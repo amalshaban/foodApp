@@ -73,8 +73,11 @@ useEffect(() => {
 </div>
 
 
-{categoriesList.length > 0 ?   
-<table className="table p-2">
+
+<div className="  p-4 d-flex justify-content-between">
+
+{categoriesList.length > 0 ?  
+  <table className="table table-striped">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -99,7 +102,9 @@ useEffect(() => {
 ))}
 
   </tbody>
-</table>:<NoData/>}
+</table>:<NoData/>} 
+</div>
+
  
 
 

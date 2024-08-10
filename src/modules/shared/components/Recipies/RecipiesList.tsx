@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import recipiesbg from '../../../../assets/imgs/Group48102127.png'
 import Header from '../Header/Header'
 import axios from 'axios';
-import { AuthorizedToken, RCIPIES_URLS } from '../../../../assets/CONSTANTS/END-POINTS';
+import { AuthorizedToken, IMG_URL, RCIPIES_URLS } from '../../../../assets/CONSTANTS/END-POINTS';
 import NoData from '../NoData/NoData';
 import { toast } from 'react-toastify';
 import { Button, Modal } from 'react-bootstrap';
@@ -62,25 +62,25 @@ handleClose();
 
     </div>
     
-    <div className="title p-4 d-flex justify-content-between">
+    <div className="title p-4 m-4 d-flex justify-content-between">
 <div className="title-info">
       <h4 className="">Recipies Table Details</h4>
       <span className="">You can check all details</span>
     </div>
 <button className='btn btn-success'>Add New Recipie</button>
 </div>
-
+<div className="  p-4 d-flex justify-content-between">
 {recipiesList.length >0 ?
-  <table className="table p-2">
+  <table className="table table-striped">
   <thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">Name</th>
-      <th scope="col">image</th>
-      <th scope="col">price</th>
-      <th scope="col">description</th>
-      <th scope="col">type</th>
-      <th scope="col">modification Date</th>
+      <th scope="col">Image</th>
+      <th scope="col">Price</th>
+      <th scope="col">Description</th>
+      <th scope="col">Type</th>
+      <th scope="col">Modification Date</th>
       <th scope="col"></th>
     </tr>
   </thead>
@@ -90,7 +90,10 @@ handleClose();
     <td>{recipie.id}</td>
     <td>{recipie.name}</td>
     <td>
-      <img src={`${RCIPIES_URLS}${recipie.imagePath}`}/>
+      {recipie.imagePath ?( 
+        <img className='img-list' src={`${IMG_URL}${recipie.imagePath}`}/>
+      ):(<img className='img-list' src={nodata}/>) 
+      }
       </td>
     <td>{recipie.price}</td>
     <td>{recipie.description}</td>
@@ -107,6 +110,8 @@ handleClose();
   </tbody>
 </table>
 :<NoData/>}
+</div>
+
 
 
 

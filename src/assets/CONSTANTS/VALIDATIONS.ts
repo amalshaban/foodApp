@@ -5,3 +5,9 @@ export const EMAILVALIDATION =  {
           message:'Email address is not valid !'
         }
        };
+export const PASSWORDVALIDATION = {
+  required: "Password is required",
+ };
+ export const FIELDVALIDATION = {
+  required: "This field is required",
+ };

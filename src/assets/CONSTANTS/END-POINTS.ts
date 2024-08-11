@@ -15,11 +15,12 @@ export const USERS_URLS ={
     getlist: `${BASE_USERS}`,
 }
 
-const BASE_CATEGORIES =`${BASE_URL}/Category/`;
+export const BASE_CATEGORIES =`${BASE_URL}/Category/`;
 
 export const CATEGORIES_URLS ={
     getlist: `${BASE_CATEGORIES}`,
     delete: (id: any)=> `${BASE_CATEGORIES}/${id}`,
+    
 }
 
 
@@ -27,4 +28,5 @@ const BASE_RECIPIES = `${BASE_URL}/Recipe/`
 export const RCIPIES_URLS ={
     getlist: `${BASE_RECIPIES}`,
     delete: (id: any)=> `${BASE_RECIPIES}/${id}`,
+    addnewrecipie : `${BASE_RECIPIES}`,
 }

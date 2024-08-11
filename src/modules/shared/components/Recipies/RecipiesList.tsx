@@ -9,6 +9,7 @@ import { Button, Modal } from 'react-bootstrap';
 import DeleteConfirmation from '../DeleteConfirmation/DeleteConfirmation';
 
 import nodata from '../../../../assets/imgs/nodata.png'
+import { Link } from 'react-router-dom';
 
 
 export default function RecipiesList() {
@@ -67,7 +68,7 @@ handleClose();
       <h4 className="">Recipies Table Details</h4>
       <span className="">You can check all details</span>
     </div>
-<button className='btn btn-success'>Add New Recipie</button>
+<Link to='/dashboard/addrecipie' className='btn btn-success pb-0'>Add New Recipie</Link>
 </div>
 <div className="  p-4 d-flex justify-content-between">
 {recipiesList.length >0 ?

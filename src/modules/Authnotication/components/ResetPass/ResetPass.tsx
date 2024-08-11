@@ -5,7 +5,7 @@ import axios from 'axios';
 import {  useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { USERS_URLS } from '../../../../assets/CONSTANTS/END-POINTS.ts';
-import { EMAILVALIDATION } from '../../../../assets/CONSTANTS/VALIDATIONS.ts'
+import { EMAILVALIDATION, PASSWORDVALIDATION } from '../../../../assets/CONSTANTS/VALIDATIONS.ts'
 export default function ResetPass() {
    
 const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -62,10 +62,7 @@ let onSubmit = async (data:any)=>{
             <span className="input-group-text" id="basic-addon1"><i className="fa-solid fa-envelope"></i></span>
             <input  type={`${isPasswordVisible?"text" : "password"  }`} className="form-control" placeholder="New password"
              aria-label="password" aria-describedby="basic-addon1"
-             {...register("password", {
-              required: "password is required",
-            
-             })}
+             {...register("password", PASSWORDVALIDATION)}
              />
               <button
              onMouseDown={(e)=>{e.preventDefault()}}

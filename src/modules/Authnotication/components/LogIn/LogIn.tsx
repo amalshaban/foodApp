@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../context/AuthContext.tsx';
 import {USERS_URLS} from '../../../../assets/CONSTANTS/END-POINTS.ts';
-import { EMAILVALIDATION } from '../../../../assets/CONSTANTS/VALIDATIONS.ts'
+import { EMAILVALIDATION, PASSWORDVALIDATION } from '../../../../assets/CONSTANTS/VALIDATIONS.ts'
 import logo from '../../../../assets/imgs/44.png'
 
 
@@ -57,9 +57,7 @@ let navigate= useNavigate();
         <span className="input-group-text" id="basic-addon1"><i className="fa-solid fa-key"></i></span>
       <input type={`${isPasswordVisible?"text" : "password"  }`} className="form-control" placeholder="password"
        aria-label="password" aria-describedby="basic-addon1"
-       {...register("password", {
-        required: "Password is required",
-       })}/>
+       {...register("password", PASSWORDVALIDATION)}/>
        <button
        onMouseDown={(e)=>{e.preventDefault()}}
        onMouseUp={(e)=>{e.preventDefault()}}

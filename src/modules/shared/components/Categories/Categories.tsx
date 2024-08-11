@@ -1,27 +1,37 @@
 import React, { useEffect, useState } from 'react'
 import Header from '../Header/Header'
 import categoriesbg from '../../../../assets/imgs/Group48102127.png'
-import { AuthorizedToken, CATEGORIES_URLS } from '../../../../assets/CONSTANTS/END-POINTS';
+import { AuthorizedToken, BASE_CATEGORIES, CATEGORIES_URLS } from '../../../../assets/CONSTANTS/END-POINTS';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import DeleteConfirmation from '../DeleteConfirmation/DeleteConfirmation';
 import { toast } from 'react-toastify';
 import NoData from '../NoData/NoData';
+import { EMAILVALIDATION } from '../../../../assets/CONSTANTS/VALIDATIONS';
+import { useForm } from 'react-hook-form';
 
 
 
 export default function Categories() {
-
+  let{
+    register,
+    handleSubmit,
+    formState:{errors, isSubmitting},
+  } = useForm();
 
   const[ catId, setCatId] = useState(0);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
+  const [showAdd, setShowAdd] = useState(false);
+  const handleCloseAdd = () => setShowAdd(false);
   const handleShow = (id: any) =>{ 
     setCatId(id);
     setShow(true);
   };
-
+  const handleShowAdd =() =>{ 
+    setShowAdd(true);
+  };
 let deletecategory = async () =>{
   try {
     let response = await axios.delete(CATEGORIES_URLS.delete(catId),AuthorizedToken);
@@ -52,6 +62,21 @@ useEffect(() => {
   }
 }, [])
 
+
+let onSubmit = async (data:any)=>{
+  try {
+    let response = await axios.post(BASE_CATEGORIES, data, AuthorizedToken);
+     console.log(response);
+    toast.success('Category Added Successfully !');
+    handleCloseAdd();
+    getCategoriesList();
+    } 
+    catch (error:any) {
+    toast.error(error.response.data.message);
+    console.log(error);
+    
+  }
+}
   return (
     <>
     
@@ -69,7 +94,7 @@ useEffect(() => {
       <h4 className="">Categories Table Details</h4>
       <span className="">You can check all details</span>
     </div>
-<button className='btn btn-success'>Add New Category</button>
+<button onClick={handleShowAdd} className='btn btn-success'>Add New Category</button>
 </div>
 
 
@@ -123,6 +148,31 @@ useEffect(() => {
         <Modal.Footer>
           <Button onClick={deletecategory} variant='btn btn-outline-danger'>Delete this Category</Button>
         </Modal.Footer>
+      </Modal>
+
+
+      
+      <Modal
+        show={showAdd}
+        onHide={handleCloseAdd}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <h4>Add Category</h4>
+        </Modal.Header>
+        <Modal.Body>
+            <form onSubmit={handleSubmit(onSubmit)}>
+            <input type="text" className="form-control" placeholder="Category Name"
+                  aria-label="name" aria-describedby="basic-addon1"
+                  {...register("name")}
+             />
+              
+          <Button className='mt-4' type='submit' disabled={isSubmitting} 
+          variant='btn btn-outline-danger'>Add Category</Button>  
+            </form>
+        </Modal.Body>
+      
       </Modal>
   
 

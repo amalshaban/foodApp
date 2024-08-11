@@ -104,3 +104,10 @@ background-color: transparent !important;
     color: #681d1d; /* Or any desired color */
   }
   
+
+
+  .title{
+    background-color: rgba(240, 255, 239, 1);
+    border-radius: 10px;
+
+  }

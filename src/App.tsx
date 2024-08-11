@@ -16,6 +16,7 @@ import AuthContextProvider from './modules/Authnotication/components/context/Aut
 import ProtectedRoute from './modules/Authnotication/components/ProtectedRoute/ProtectedRoute'
 import UsersList from './modules/shared/components/UsersList/UsersList'
 import Categories from './modules/shared/components/Categories/Categories'
+import AddRecipie from './modules/shared/components/Recipies/AddRecipie'
 
 function App() {
 const routes = createBrowserRouter([
@@ -45,6 +46,7 @@ const routes = createBrowserRouter([
       {path:'recipieslist', element: <RecipiesList/>},
       {path:'userslist', element: <UsersList/>},
       {path:'categories', element: <Categories/>},
+      {path:'addrecipie', element: <AddRecipie/>},
     ]
   }
 ])

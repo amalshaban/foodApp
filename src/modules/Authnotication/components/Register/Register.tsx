@@ -25,8 +25,8 @@ const appendToFormData = (data:any) => {
   formData.append('phoneNumber' , data.phoneNumber)
   formData.append('password' , data.password)
   formData.append('confirmPassword' , data.confirmPassword)
-  formData.append('profileImage' , data.profileImage[0])
-
+  
+data?.profileImage && formData.append('profileImage', data.profileImage[0])
   return formData;
 }
 
@@ -38,7 +38,7 @@ let onSubmit = async (data:any)=>{
     let response = await axios.post(USERS_URLS.register, registerData);
     console.log(response);
 
-    // toast.success('Registeration success');
+    toast.success('Registeration success');
     // navigate('/login');
     } 
     catch (error:any) {
@@ -145,7 +145,6 @@ let onSubmit = async (data:any)=>{
            {...register("profileImage")}
            />
 </div>
-{errors.profileImage  && <p className='alert alert-danger p-2'>{errors?.profileImage?.message}</p>}
       
         </div>
      </div>

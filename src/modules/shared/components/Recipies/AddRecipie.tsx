@@ -89,46 +89,60 @@ useEffect(() => {
         </div>
     <button  onClick={handleClick} className='btn btn-success'>All Recipes !</button>
     </div>
-
-<Form onSubmit={handleSubmit(onSubmit)} className='w-75 m-auto'>  
-    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-        <Form.Control type="name" placeholder="Recipie Name" 
-       required
-        />
-    </Form.Group>
-
-    <Form.Select  required className='mb-3' aria-label="Default select example">
-      <option disabled>Choose a Tag</option>
+    <form className='w-75 m-auto' onSubmit={handleSubmit(onSubmit)}>
+        <div className="input-group mb-3">
+          <input type="text" className="form-control" placeholder="Recipie Name"
+           aria-label="name" aria-describedby="basic-addon1"
+           {...register("name", FIELDVALIDATION)}
+           />
+        </div>
+        {errors.name && <p className='alert alert-danger p-2'>{errors?.name?.message}</p>}
+        <div className="input-group mb-3">
+            <select>
+            <option disabled>Choose a Tag</option>
       {tagsList.map((tag:any)=>(
 
 <option value={tag.id}>{tag.name}</option>
-      ))}
-      
-    </Form.Select>
+      ))}  
+            </select>  
+        </div>  
+        <div className="input-group mb-3">
+          <input type="number" className="form-control" placeholder="Price"
+           aria-label="price" aria-describedby="basic-addon1"
+           {...register("price", FIELDVALIDATION)}
+           />
+        </div>
+        {errors.price && <p className='alert alert-danger p-2'>{errors?.price?.message}</p>}
 
-    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-        <Form.Control type="number" placeholder="Price" required/>
-    </Form.Group>
-
-    <Form.Select required className='mb-3' aria-label="Default select example">
-      <option disabled>Choose Category</option>
+        <div className="input-group mb-3">
+            <select>
+            <option disabled>Choose Category</option>
       {categoriesList.map((category:any)=>(
 
 <option value={category.id}>{category.name}</option>
       ))}
-    </Form.Select>
+            </select>  
+        </div> 
 
-      <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-        <Form.Control required  placeholder="Description" as="textarea" rows={3} />
-      </Form.Group>
 
-      <Form.Group controlId="formFileLg" className="mb-3">
-        <Form.Label>Drag & Drop or Choose a Item Image to Upload</Form.Label>
-        <Form.Control type="file" size="lg" />
-      </Form.Group>
-      <Button className='btn btn-success my-1 mx-1'>Cancel</Button>
-      <Button type='Submit' className='btn btn-success my-1 mx-1'>Save</Button>
-    </Form>
+        <div className="input-group mb-3">
+          <input type="text-area"  as="textarea" rows={3} className="form-control" placeholder="Description"
+           aria-label="description" aria-describedby="basic-addon1"
+           {...register("description", FIELDVALIDATION)}
+           />
+        </div>
+        {errors.description && <p className='alert alert-danger p-2'>{errors?.description?.message}</p>}
+
+
+        <div className="mb-3">
+  <input className="form-control" type="file" id="formFile"/>
+</div>
+
+
+<button className='btn btn-success my-1 mx-1'>Cancel</button>
+<button  type='Submit' className='btn btn-success my-1 mx-1'>Save</button>
+    </form>
+
     </>
     
   )

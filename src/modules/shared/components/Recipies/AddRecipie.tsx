@@ -102,7 +102,7 @@ useEffect(() => {
             <option disabled>Choose a Tag</option>
       {tagsList.map((tag:any)=>(
 
-<option value={tag.id}>{tag.name}</option>
+<option key={tag.id}  value={tag.id}>{tag.name}</option>
       ))}  
             </select>  
         </div>  
@@ -119,7 +119,7 @@ useEffect(() => {
             <option disabled>Choose Category</option>
       {categoriesList.map((category:any)=>(
 
-<option value={category.id}>{category.name}</option>
+<option key={category.id} value={category.id}>{category.name}</option>
       ))}
             </select>  
         </div> 

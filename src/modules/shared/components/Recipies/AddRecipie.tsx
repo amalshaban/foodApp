@@ -135,7 +135,9 @@ useEffect(() => {
 
 
         <div className="mb-3">
-  <input className="form-control" type="file" id="formFile"/>
+  <input className="form-control" type="file" id="formFile"
+      {...register("recipeImage", FIELDVALIDATION)}
+      />
 </div>
 
 

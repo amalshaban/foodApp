@@ -141,8 +141,12 @@ let onSubmit = async (data:any)=>{
      <div className="row">
         <div className="col-md-12">
         <div className="mb-3">
-  <input className="form-control" type="file" id="formFile"/>
+  <input className="form-control" type="file" id="formFile"
+           {...register("profileImage")}
+           />
 </div>
+{errors.profileImage  && <p className='alert alert-danger p-2'>{errors?.profileImage?.message}</p>}
+      
         </div>
      </div>
      <button className='btn btn-success text-center m-auto w-75'>Register</button>

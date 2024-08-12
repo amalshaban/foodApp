@@ -16,6 +16,7 @@ import ProtectedRoute from './modules/Authnotication/components/ProtectedRoute/P
 import UsersList from './modules/shared/components/UsersList/UsersList'
 import Categories from './modules/shared/components/Categories/Categories'
 import AddRecipie from './modules/shared/components/Recipies/AddRecipie'
+import VerifyAccount from './modules/Authnotication/components/VerifyAccount/VerifyAccount'
 
 function App() {
 const routes = createBrowserRouter([
@@ -28,7 +29,8 @@ const routes = createBrowserRouter([
         {path:'login', element: <LogIn/>},
         {path:'forgetpass', element: <ForgetPass/>},
         {path:'resetpass', element: <ResetPass/>},
-        {path: 'register' , element:<Register/>}
+        {path: 'register' , element:<Register/>},
+        {path: 'verifyaccount' , element:<VerifyAccount/>}
       ]
   },
   {

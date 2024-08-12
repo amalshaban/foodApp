@@ -36,7 +36,7 @@ export default function AddRecipie() {
             let response = await axios.post(RCIPIES_URLS.addnewrecipie, recipieData, AuthorizedToken);
             console.log(response);
             toast.success('A new recipie was added successfully');
-            navigate('/recipieslist');
+            navigate('/dashboard/recipieslist');
             } 
             catch (error:any) {
            toast.error(error.response.data.message);
@@ -106,7 +106,7 @@ useEffect(() => {
             <option disabled>Choose a Tag</option>
       {tagsList.map((tag:any)=>(
 
-<option value={tag.id}>{tag.name}</option>
+<option value={tag.tag.id}>{tag.tag.name}</option>
       ))}  
             </select>  
         </div>

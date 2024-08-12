@@ -38,11 +38,11 @@ let onSubmit = async (data:any)=>{
     let response = await axios.post(USERS_URLS.register, registerData);
     console.log(response);
 
-    toast.success(response.data.data.message);
-     navigate('/login');
+    toast.success(response.data.message);
+     navigate('/verifyaccount');
     } 
     catch (error:any) {
-    toast.error(error.response.message);
+    toast.error(error.response.data.message);
     console.log(error);
     
   }

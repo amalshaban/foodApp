@@ -13,6 +13,7 @@ export const USERS_URLS ={
     resetRequest: `${BASE_USERS}/Reset/Request`,
     reset: `${BASE_USERS}/Reset`,
     getlist: `${BASE_USERS}`,
+    verify: `${BASE_USERS}/verify`,
 }
 
 export const BASE_CATEGORIES =`${BASE_URL}/Category/`;

@@ -39,7 +39,7 @@ export default function AddRecipie() {
             navigate('/recipieslist');
             } 
             catch (error:any) {
-            // toast.error(error.response.data.message);
+           toast.error(error.response.data.message);
             console.log(error);
             
           }
@@ -65,7 +65,7 @@ let getAllTags =async()=>{
   try {
     let response = await axios.get(RCIPIES_URLS.getlist,AuthorizedToken);
     setTagsList(response.data.data);
-
+  console.log(response.data.data);
   } catch (error) {
     console.log(error);
   }
@@ -97,15 +97,22 @@ useEffect(() => {
            />
         </div>
         {errors.name && <p className='alert alert-danger p-2'>{errors?.name?.message}</p>}
+       
+       
         <div className="input-group mb-3">
-            <select>
+            <select className="form-control" 
+             {...register("tagId", FIELDVALIDATION)}
+            >
             <option disabled>Choose a Tag</option>
       {tagsList.map((tag:any)=>(
 
 <option value={tag.id}>{tag.name}</option>
       ))}  
             </select>  
-        </div>  
+        </div>
+        {errors.tagId && <p className='alert alert-danger p-2'>{errors.tagId.message}</p>}
+
+
         <div className="input-group mb-3">
           <input type="number" className="form-control" placeholder="Price"
            aria-label="price" aria-describedby="basic-addon1"
@@ -115,7 +122,9 @@ useEffect(() => {
         {errors.price && <p className='alert alert-danger p-2'>{errors?.price?.message}</p>}
 
         <div className="input-group mb-3">
-            <select>
+            <select className="form-control"
+             {...register("categoriesIds", FIELDVALIDATION)}
+            >
             <option disabled>Choose Category</option>
       {categoriesList.map((category:any)=>(
 
@@ -123,6 +132,8 @@ useEffect(() => {
       ))}
             </select>  
         </div> 
+        {errors.categoriesIds && <p className='alert alert-danger p-2'>{errors?.categoriesIds?.message}</p>}
+
 
 
         <div className="input-group mb-3">
@@ -139,6 +150,7 @@ useEffect(() => {
       {...register("recipeImage", FIELDVALIDATION)}
       />
 </div>
+{errors.recipeImage && <p className='alert alert-danger p-2'>{errors?.recipeImage?.message}</p>}
 
 
 <button className='btn btn-success my-1 mx-1'>Cancel</button>

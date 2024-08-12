@@ -1,5 +1,5 @@
 import { jwtDecode } from "jwt-decode";
-import { PropsWithChildren, useState } from "react";
+import { PropsWithChildren, useEffect, useState } from "react";
 import { createContext } from "react";
 
 
@@ -16,6 +16,17 @@ console.log(decodedToken);
 console.log(loginData);
 
 }
+useEffect(() => {
+  if(localStorage.getItem("token"))
+  {
+    saveLoginData();
+  }
+
+  return () => {
+    
+  }
+}, [])
+
     return<AuthContext.Provider value={{ saveLoginData , loginData }}>
         {props.children}
     </AuthContext.Provider>

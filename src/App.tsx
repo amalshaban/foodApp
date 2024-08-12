@@ -12,7 +12,6 @@ import Home from './modules/shared/components/Home/Home'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Register from './modules/Authnotication/components/Register/Register'
-import AuthContextProvider from './modules/Authnotication/components/context/AuthContext'
 import ProtectedRoute from './modules/Authnotication/components/ProtectedRoute/ProtectedRoute'
 import UsersList from './modules/shared/components/UsersList/UsersList'
 import Categories from './modules/shared/components/Categories/Categories'

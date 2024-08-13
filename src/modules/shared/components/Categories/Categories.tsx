@@ -14,6 +14,8 @@ import { useForm } from 'react-hook-form';
 
 
 export default function Categories() {
+
+  const [arrayOfPages, setArrayOfPages] = useState([])
   let{
     register,
     handleSubmit,
@@ -37,7 +39,7 @@ let deletecategory = async () =>{
     let response = await axios.delete(CATEGORIES_URLS.delete(catId),AuthorizedToken);
 console.log(response);
 toast.success("Category deleted successfully");
-getCategoriesList();
+// getCategoriesList();
 handleClose();
   } catch (error) {
     console.log(error);
@@ -47,17 +49,22 @@ handleClose();
 
 
   let [categoriesList, setCategoriesList] =  useState([]);
-  let getCategoriesList = async ()=>{
+  let getCategoriesList = async (pageNumber: number, pageSize: number)=>{
     try {
-      let response = await axios.get(CATEGORIES_URLS.getlist,
-         { headers: { Authorization: `Bearer ${localStorage.token}` } });
+      let response = await axios.get(CATEGORIES_URLS.getlist, {
+        headers: { Authorization: `Bearer ${localStorage.token}` } ,
+        params: {pageSize: pageSize, pageNumber: pageNumber}
+      });
+
+           let newArray:any = Array(response.data.totalNumberOfPages).fill().map((_, i) => i+1);
+            setArrayOfPages(newArray);
             setCategoriesList(response.data.data);
     } catch (error) {
       console.log(error);
     }
   }
 useEffect(() => {
-  getCategoriesList();
+   getCategoriesList(2,2);
   return () => {
   }
 }, [])
@@ -69,7 +76,7 @@ let onSubmit = async (data:any)=>{
      console.log(response);
     toast.success('Category Added Successfully !');
     handleCloseAdd();
-    getCategoriesList();
+     getCategoriesList(2,2);
     } 
     catch (error:any) {
     toast.error(error.response.data.message);
@@ -130,7 +137,24 @@ let onSubmit = async (data:any)=>{
 </table>:<NoData/>} 
 </div>
 
- 
+ <div className="w-25 m-auto">
+ <nav aria-label="Page navigation example">
+  <ul className="pagination">
+
+    <li className="page-item"><a className="page-link" href="#">Previous</a></li>
+    {arrayOfPages.map((pageNo:any)=>(
+
+<li key={pageNo} onClick={() =>getCategoriesList(pageNo,2)} className="page-item">
+  <a  className="page-link" href="#">
+    {pageNo}
+    </a>
+  </li>
+    ))}
+
+    <li className="page-item"><a className="page-link" href="#">Next</a></li>
+  </ul>
+</nav>
+ </div>
 
 
       <Modal

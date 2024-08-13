@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { AuthorizedToken, CATEGORIES_URLS, RCIPIES_URLS } from '../../../../assets/CONSTANTS/END-POINTS';
-import { Button } from 'react-bootstrap';
-import { FIELDVALIDATION } from '../../../../assets/CONSTANTS/VALIDATIONS';
+import { AuthorizedToken, CATEGORIES_URLS, RCIPIES_URLS } from '../../../../assets/CONSTANTS/END-POINTS.ts'
+import { FIELDVALIDATION } from '../../../../assets/CONSTANTS/VALIDATIONS'
 import { toast } from 'react-toastify';
 
 
@@ -33,7 +31,8 @@ export default function AddRecipie() {
         let onSubmit = async(data: any)=>{
           let recipieData = appendToFormData(data);
           try {
-            let response = await axios.post(RCIPIES_URLS.addnewrecipie, recipieData, AuthorizedToken);
+            let response = await axios.post(RCIPIES_URLS.addnewrecipie, recipieData,AuthorizedToken
+            );
             console.log(response);
             toast.success('A new recipie was added successfully');
             navigate('/dashboard/recipieslist');

@@ -26,7 +26,10 @@ export default function RecipiesList() {
   let [recipiesList, setRecipiesList] =  useState([]);
   let getRecipiesList = async (data: any)=>{
     try {
-      let response = await axios.get(RCIPIES_URLS.getlist,AuthorizedToken);
+      let response = await axios.get(RCIPIES_URLS.getlist,{
+        AuthorizedToken,
+        params: {pageSize: 3, pageNumber: 1}
+      });
          setRecipiesList(response.data.data);
          console.log(response.data.data)
     } catch (error) {
@@ -41,7 +44,7 @@ useEffect(() => {
 
 let deleteRecipie = async () =>{
   try {
-    let response = await axios.delete(RCIPIES_URLS.delete(recipieId),AuthorizedToken);
+    let response = await axios.delete(RCIPIES_URLS.delete(recipieId), AuthorizedToken);
 console.log(response);
 toast.success("Recipie deleted successfully");
 getRecipiesList();

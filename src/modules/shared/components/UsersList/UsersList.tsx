@@ -27,7 +27,7 @@ export default function UsersList() {
   let [usersList, setUsersList] =  useState([]);
   let getUsersList = async ()=>{
     try {
-      let response = await axios.get(CATEGORIES_URLS.getlist,AuthorizedToken);
+      let response = await axios.get(USERS_URLS.getlist,AuthorizedToken);
          setUsersList(response.data.data);
     } catch (error) {
       console.log(error);

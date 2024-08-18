@@ -27,11 +27,11 @@ let getFavList =async(pageSize: number)=>{
   }, [])
   
   
-let deletefavrecipie =async(id)=>{
+let deletefavrecipie =async(id:number)=>{
     try {
       let response = await axios.delete(USER_RECIPIES_URLS.delete(id),AuthorizedToken);
         console.log(response);
-        getFavList();
+        getFavList(10);
         toast.success("recipie was deleted from your favourites list")
     } catch (error) {
       console.log(error);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import { AuthorizedToken, IMG_URL, USER_RECIPIES_URLS } from '../../../../assets/CONSTANTS/END-POINTS';
 import axios from 'axios';
 import NoData from '../NoData/NoData';

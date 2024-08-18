@@ -51,7 +51,7 @@ let deletefavrecipie =async(id:number)=>{
     {favList.length > 0 ?(
  <div className="container">
  <div className="row">
- {favList.map((fav)=>(
+ {favList.map((fav:any)=>(
 
 <div key={fav.id} className="col-md-4 mt-4">
     <div className="favimg">

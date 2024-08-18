@@ -1,4 +1,3 @@
-import React from 'react'
 
 import nodata from '../../../../assets/imgs/nodata.png'
 

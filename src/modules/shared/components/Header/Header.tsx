@@ -1,4 +1,4 @@
-import React from 'react'
+
 export default function Header({title, discribtion , imgurl}) {
   return (
     <div className=" headercontainer mx-auto">

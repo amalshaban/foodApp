@@ -1,11 +1,10 @@
-import { useContext, useState } from 'react'
+
 import { useForm } from 'react-hook-form'
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { AuthContext } from '../context/AuthContext.tsx';
 import {USERS_URLS} from '../../../../assets/CONSTANTS/END-POINTS.ts';
-import { EMAILVALIDATION, FIELDVALIDATION, PASSWORDVALIDATION } from '../../../../assets/CONSTANTS/VALIDATIONS.ts'
+import { EMAILVALIDATION, FIELDVALIDATION } from '../../../../assets/CONSTANTS/VALIDATIONS.ts'
 import logo from '../../../../assets/imgs/44.png'
 
 export default function VerifyAccount() {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Header from '../Header/Header'
 import categoriesbg from '../../../../assets/imgs/Group48102127.png'
 import { AuthorizedToken, BASE_CATEGORIES, CATEGORIES_URLS } from '../../../../assets/CONSTANTS/END-POINTS';
@@ -19,7 +19,7 @@ export default function Categories() {
     register,
     setValue,
     handleSubmit,
-    formState:{errors, isSubmitting},
+    formState:{ isSubmitting},
   } = useForm();
 
   const[ catId, setCatId] = useState(0);
@@ -36,7 +36,7 @@ export default function Categories() {
     setShowAdd(true);
   };
   const handleCloseupdate = () => setShowupdate(false);
-  const handleShowupdate = (Category) =>{ 
+  const handleShowupdate = (Category:any) =>{ 
     
     setShowupdate(true);
     setValue('name',Category.name)
@@ -94,7 +94,7 @@ let onSubmit = async (data:any)=>{
   }
 }
 
-let updateCategory = async (data)=>{
+let updateCategory = async (data:object)=>{
   try {
     let response = await axios.put(BASE_CATEGORIES, data, AuthorizedToken);
      console.log(response);
@@ -110,9 +110,9 @@ let updateCategory = async (data)=>{
   }
 }
 const [nameValue, setNameValue] = useState("")
-let getNameValue = (input) => {
+let getNameValue = (input:any) => {
 setNameValue(input.target.value);
-getCategoriesList(1,2,input.target.value);
+getCategoriesList(1,2,nameValue);
 }
   return (
     <div className='container'>
@@ -154,7 +154,7 @@ placeholder='search by name ...'/>
     </tr>
   </thead>
   <tbody>
-{categoriesList.map((category)=>(
+{categoriesList.map((category:any)=>(
   <tr key={category.id}>
     
     <td>{category.id}</td>

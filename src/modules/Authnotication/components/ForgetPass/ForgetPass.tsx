@@ -1,4 +1,3 @@
-import React from 'react'
 import logo from '../../../../assets/imgs/44.png'
 import { useForm } from 'react-hook-form'
 import axios from 'axios';

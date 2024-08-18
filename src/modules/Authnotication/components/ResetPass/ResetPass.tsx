@@ -1,6 +1,6 @@
 import  {useState}  from 'react'
 import logo from '../../../../assets/imgs/44.png'
-import { get, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import axios from 'axios';
 import {  useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -10,6 +10,7 @@ export default function ResetPass() {
    
 const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 let navigate= useNavigate();
+
 let{
   register,
   getValues,

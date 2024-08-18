@@ -64,7 +64,7 @@ handleClose();
         params: {pageSize: pageSize, pageNumber: pageNumber, name: nameInput}
       });
 
-           let newArray:any = Array(response.data.totalNumberOfPages).fill().map((_, i) => i+1);
+           let newArray:any = Array(response.data.totalNumberOfPages).fill("",0,0).map((_, i) => i+1);
             setArrayOfPages(newArray);
             setCategoriesList(response.data.data);
     } catch (error) {

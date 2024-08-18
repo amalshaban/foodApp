@@ -22,19 +22,31 @@ export default function UsersList() {
   };
 
  
+  const [arrayOfPages, setArrayOfPages] = useState([]);
 
   
   let [usersList, setUsersList] =  useState([]);
-  let getUsersList = async ()=>{
+  let getUsersList = async (
+    pageNumber: number, 
+    pageSize: number, 
+    nameInput: string,
+    countryValue: string,
+    emailValue: string
+  )=>{
     try {
-      let response = await axios.get(USERS_URLS.getlist,AuthorizedToken);
+      let response = await axios.get(USERS_URLS.getlist, {
+        headers: { Authorization: `Bearer ${localStorage.token}` } ,
+        params: {pageSize: pageSize, pageNumber: pageNumber, userName: nameInput, country:countryValue, email:emailValue }
+      });
+      let newArray:any = Array(response.data.totalNumberOfPages).fill().map((_, i) => i+1);
+      setArrayOfPages(newArray);
          setUsersList(response.data.data);
     } catch (error) {
       console.log(error);
     }
   }
 useEffect(() => {
-  getUsersList();
+  getUsersList(1,2,"","","");
   return () => {
   }
 }, [])
@@ -47,7 +59,7 @@ let deleteUser = async () =>{
     console.log(response);
     console.log(userId);
 toast.success("User deleted successfully");
-getUsersList();
+getUsersList(1,2,"","","");
 handleClose();
   } catch (error) {
     console.log(error);
@@ -55,8 +67,25 @@ handleClose();
   }
 }
 
+
+const [nameValue, setNameValue] = useState("");
+let getNameValue = (input) => {
+  setNameValue(input.target.value);
+  getUsersList(1,2,input.target.value,countryValue,emailValue);
+  }
+  const [countryValue, setCountryValue] = useState("");
+  let getCountryValue = (input) => {
+    setCountryValue(input.target.value);
+    getUsersList(1,2,nameValue,input.target.value,emailValue);
+    }
+    const [emailValue, setEmailValue] = useState("");
+    let getEmailValue = (input) => {
+      setEmailValue(input.target.value);
+      getUsersList(1,2,nameValue,countryValue,input.target.value);
+      }
+
   return (
-    <>
+    <div className='container'>
     <Header 
       title = {"Users List"}
       discribtion = {"You can now add your items that any user can order it from the Application and you can edit"}
@@ -64,19 +93,59 @@ handleClose();
     />
     
 
-    <div className="title p-4 d-flex justify-content-between">
+    <div className="title p-4 mt-2 d-flex justify-content-between align-items-center">
 <div className="title-info">
       <h4 className="">Users Table Details</h4>
       <span className="text-muted">You can check all details</span>
     </div>
 </div>
 
-{usersList.length > 0 ? 
-<div className="table-container  p-4 d-flex justify-content-between">
 
+<div className="row mt-2">
+      <div className="col-md-6">
+      <div className="input-group">
+      <input type='text' 
+      className='form-control' 
+      onChange={getNameValue} 
+      placeholder='search by name ...'
+      />
+    </div>
+    </div>
+    <div className="col-md-3">
+    <div className="input-group">
+            <select className="form-control" 
+             onChange={getCountryValue} 
+            >
+            <option disabled>Choose a Tag</option>
+      {usersList.map((user:any)=>(
+
+<option value={user.country}>{user.country}</option>
+      ))}  
+            </select>  
+        </div>
+    </div>
+    <div className="col-md-3">
+    <div className="input-group">
+            <select className="form-control" 
+             onChange={getEmailValue} 
+            >
+            <option disabled>Choose a Tag</option>
+      {usersList.map((user:any)=>(
+
+<option value={user.email}>{user.email}</option>
+      ))}  
+            </select>  
+        </div>
+    </div>
+    </div>
+
+
+<div className=" d-flex mt-2 justify-content-between align-items-center">  
+{usersList.length > 0 ? 
 <table className="table table-striped">
 
-  <thead className='table-secondary pb-2'>
+
+  <thead className=''>
     <tr className='group-header'>
       <th scope="col">Name</th>
       <th scope="col">Image</th>
@@ -89,31 +158,50 @@ handleClose();
   <tbody>
 {usersList.map((user)=>(
   <tr key={user.id}>
-    <td>{user.name}</td>
+    <td>{user.userName}</td>
    <td>
    {user.imagePath ?( 
         <img className='img-list' src={`${IMG_URL}${user.imagePath}`}/>
       ):(<img className='img-list' src={nodata}/>) 
       }
    </td>
+   
     <td>{user.creationDate}</td>
     
     <td>
     <i 
     
-    onClick={()=>handleShow(user.id)} className="fa-solid fa-trash me-2"></i>
-    <i className="fa-solid fa-pen-to-square"></i>
+    onClick={()=>handleShow(user.id)} className="fa-solid fa-trash text-danger"></i>
+    <i className="fa-solid text-success ms-2 fa-pen-to-square"></i>
     </td>
   </tr>
 ))}
 
   </tbody>
 </table>
-</div>
-
-
 :<NoData/>}
+</div>
+  
+  <div className="d-flex">
+ <nav aria-label=" example">
+  <ul className="pagination">
 
+    <li className="page-item"><a className="page-link" href="#">Previous</a></li>
+    {arrayOfPages.map((pageNo:any)=>(
+
+<li key={pageNo} onClick={() =>getUsersList(pageNo,2,"","","")} className="page-item">
+  <a  className="page-link" href="#">
+    {pageNo}
+    </a>
+  </li>
+    ))}
+
+    <li className="page-item"><a className="page-link" href="#">Next</a></li>
+  </ul>
+</nav>
+ 
+
+</div>
 
 
 <Modal
@@ -136,6 +224,6 @@ handleClose();
 
 
 
-    </>
+    </div>
   )
 }

@@ -8,16 +8,16 @@ import Modal from 'react-bootstrap/Modal';
 import DeleteConfirmation from '../DeleteConfirmation/DeleteConfirmation';
 import { toast } from 'react-toastify';
 import NoData from '../NoData/NoData';
-import { EMAILVALIDATION } from '../../../../assets/CONSTANTS/VALIDATIONS';
 import { useForm } from 'react-hook-form';
 
 
 
 export default function Categories() {
 
-  const [arrayOfPages, setArrayOfPages] = useState([])
+  const [arrayOfPages, setArrayOfPages] = useState([]);
   let{
     register,
+    setValue,
     handleSubmit,
     formState:{errors, isSubmitting},
   } = useForm();
@@ -26,6 +26,7 @@ export default function Categories() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const [showAdd, setShowAdd] = useState(false);
+  const [showupdate, setShowupdate] = useState(false);
   const handleCloseAdd = () => setShowAdd(false);
   const handleShow = (id: any) =>{ 
     setCatId(id);
@@ -34,12 +35,19 @@ export default function Categories() {
   const handleShowAdd =() =>{ 
     setShowAdd(true);
   };
+  const handleCloseupdate = () => setShowupdate(false);
+  const handleShowupdate = (Category) =>{ 
+    
+    setShowupdate(true);
+    setValue('name',Category.name)
+  };
+  
 let deletecategory = async () =>{
   try {
     let response = await axios.delete(CATEGORIES_URLS.delete(catId),AuthorizedToken);
 console.log(response);
 toast.success("Category deleted successfully");
-// getCategoriesList();
+ getCategoriesList(1,2,"");
 handleClose();
   } catch (error) {
     console.log(error);
@@ -49,11 +57,11 @@ handleClose();
 
 
   let [categoriesList, setCategoriesList] =  useState([]);
-  let getCategoriesList = async (pageNumber: number, pageSize: number)=>{
+  let getCategoriesList = async (pageNumber: number, pageSize: number, nameInput: string)=>{
     try {
       let response = await axios.get(CATEGORIES_URLS.getlist, {
         headers: { Authorization: `Bearer ${localStorage.token}` } ,
-        params: {pageSize: pageSize, pageNumber: pageNumber}
+        params: {pageSize: pageSize, pageNumber: pageNumber, name: nameInput}
       });
 
            let newArray:any = Array(response.data.totalNumberOfPages).fill().map((_, i) => i+1);
@@ -64,7 +72,7 @@ handleClose();
     }
   }
 useEffect(() => {
-   getCategoriesList(2,2);
+   getCategoriesList(1,2,"");
   return () => {
   }
 }, [])
@@ -76,7 +84,8 @@ let onSubmit = async (data:any)=>{
      console.log(response);
     toast.success('Category Added Successfully !');
     handleCloseAdd();
-     getCategoriesList(2,2);
+     getCategoriesList(1,2,"");
+     setValue('name',null);
     } 
     catch (error:any) {
     toast.error(error.response.data.message);
@@ -84,8 +93,29 @@ let onSubmit = async (data:any)=>{
     
   }
 }
+
+let updateCategory = async (data)=>{
+  try {
+    let response = await axios.put(BASE_CATEGORIES, data, AuthorizedToken);
+     console.log(response);
+    toast.success('Category updated Successfully !');
+    handleCloseupdate();
+     getCategoriesList(1,2,"");
+     setValue('name',null);
+    } 
+    catch (error:any) {
+    toast.error(error.response.data.message);
+    console.log(error);
+    
+  }
+}
+const [nameValue, setNameValue] = useState("")
+let getNameValue = (input) => {
+setNameValue(input.target.value);
+getCategoriesList(1,2,input.target.value);
+}
   return (
-    <>
+    <div className='container'>
     
    
     <div>
@@ -96,7 +126,7 @@ let onSubmit = async (data:any)=>{
     />
     </div>
 
-<div className="title p-4 d-flex justify-content-between">
+<div className="title p-4 mt-2 d-flex justify-content-between align-items-center">
 <div className="title-info">
       <h4 className="">Categories Table Details</h4>
       <span className="">You can check all details</span>
@@ -105,9 +135,14 @@ let onSubmit = async (data:any)=>{
 </div>
 
 
+<div className="d-flex mt-2">
+<input type='text' 
+className='form-control' 
+onChange={getNameValue} 
+placeholder='search by name ...'/>
+</div>
 
-<div className="  p-4 d-flex justify-content-between">
-
+<div className= "p-2 d-flex justify-content-between">
 {categoriesList.length > 0 ?  
   <table className="table table-striped">
   <thead>
@@ -127,8 +162,8 @@ let onSubmit = async (data:any)=>{
     <td>{category.creationDate}</td>
     
     <td>
-    <i  onClick={()=>handleShow(category.id)} className="fa-solid fa-trash me-2"></i>
-    <i className="fa-solid fa-pen-to-square"></i>
+    <i  onClick={()=>handleShow(category.id)} className="fa-solid fa-trash text-danger"></i>
+    <i onClick={()=>handleShowupdate(category)} className="fa-solid text-success ms-2 fa-pen-to-square"></i>
     </td>
   </tr>
 ))}
@@ -137,14 +172,14 @@ let onSubmit = async (data:any)=>{
 </table>:<NoData/>} 
 </div>
 
- <div className="w-25 m-auto">
+ <div className="d-flex justify-content-center">
  <nav aria-label="Page navigation example">
   <ul className="pagination">
 
     <li className="page-item"><a className="page-link" href="#">Previous</a></li>
     {arrayOfPages.map((pageNo:any)=>(
 
-<li key={pageNo} onClick={() =>getCategoriesList(pageNo,2)} className="page-item">
+<li key={pageNo} onClick={() =>getCategoriesList(pageNo,2,"")} className="page-item">
   <a  className="page-link" href="#">
     {pageNo}
     </a>
@@ -176,6 +211,7 @@ let onSubmit = async (data:any)=>{
 
 
       
+      
       <Modal
         show={showAdd}
         onHide={handleCloseAdd}
@@ -200,6 +236,31 @@ let onSubmit = async (data:any)=>{
       </Modal>
   
 
-    </>
+      <Modal
+        show={showupdate}
+        onHide={handleCloseupdate}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <h4>update Category</h4>
+        </Modal.Header>
+        <Modal.Body>
+            <form onSubmit={handleSubmit(onSubmit)}>
+            <input type="text" className="form-control" placeholder="Category Name"
+                  aria-label="name" aria-describedby="basic-addon1"
+                  {...register("name")}
+             />
+              
+          <Button onClick={updateCategory} className='mt-4' type='submit' disabled={isSubmitting} 
+          variant='btn btn-outline-danger'>update Category</Button>  
+            </form>
+        </Modal.Body>
+      
+      </Modal>
+
+
+
+    </div>
   )
 }

@@ -17,6 +17,7 @@ import UsersList from './modules/shared/components/UsersList/UsersList'
 import Categories from './modules/shared/components/Categories/Categories'
 import AddRecipie from './modules/shared/components/Recipies/AddRecipie'
 import VerifyAccount from './modules/Authnotication/components/VerifyAccount/VerifyAccount'
+import Favourites from './modules/shared/components/Favourites/Favourites'
 
 function App() {
 const routes = createBrowserRouter([
@@ -48,6 +49,8 @@ const routes = createBrowserRouter([
       {path:'userslist', element: <UsersList/>},
       {path:'categories', element: <Categories/>},
       {path:'addrecipie', element: <AddRecipie/>},
+      {path:'updaterecipie/:data', element: <AddRecipie/>},
+      {path:'favourites', element: <Favourites/>},
     ]
   }
 ])

@@ -2,15 +2,13 @@ import React, { useContext, useState } from 'react'
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
-
-
-
 import logo from '../../../../assets/imgs/3.png'
+import { AuthContext } from '../../../Authnotication/components/context/AuthContext';
 
 export default function SideBar() {
 
   
-
+  let { loginData } = useContext(AuthContext);
   let [ isCollapsed , setIsCollapsed] = useState(false);
   let toggle =()=>{
     setIsCollapsed(!isCollapsed);
@@ -20,6 +18,7 @@ export default function SideBar() {
     localStorage.removeItem('token');
     navigate('/login');
   }
+  
   return (
     <div className='sidebarcontainer'>
     <Sidebar collapsed={isCollapsed}>
@@ -27,13 +26,18 @@ export default function SideBar() {
     
     <MenuItem className='firstchild my-4 mx-2' onClick={toggle} icon={<img src={logo}/>}></MenuItem>
     <MenuItem icon={<i className="fa-solid fa-house"></i>} component={<NavLink to="/dashboard/home" />}> Home</MenuItem>
+    {loginData?.userGroup != "SuperAdmin"?(<MenuItem icon={<i className="fa-solid fa-star"></i>} 
+    component={<NavLink to="/dashboard/favourites" />}> Favouraites</MenuItem>) :("")}
+    {loginData?.userGroup == "SuperAdmin"?(
     <MenuItem icon={<i className="fa-solid fa-users"></i>} component={<NavLink to="/dashboard/userslist" />}> Users</MenuItem>
+    ):("")}
     <MenuItem icon={<i className="fa-solid fa-bowl-food"></i>} component={<NavLink to="/dashboard/recipieslist" />}> Recipies</MenuItem>
+    {loginData?.userGroup == "SuperAdmin"?(
     <MenuItem icon={<i className="fa-solid fa-list"></i>} component={<NavLink to="/dashboard/categories" />}> Categories</MenuItem>
-    
+  ):("")}
     <MenuItem icon={<i className="fa-solid fa-right-from-bracket"></i>} onClick={handleClick}> Logout</MenuItem>
   </Menu>
 </Sidebar>
 </div>
   )
-}
+  }

@@ -21,6 +21,7 @@ export const BASE_CATEGORIES =`${BASE_URL}/Category/`;
 export const CATEGORIES_URLS ={
     getlist: `${BASE_CATEGORIES}`,
     delete: (id: any)=> `${BASE_CATEGORIES}/${id}`,
+    update: (id: any)=> `${BASE_CATEGORIES}/${id}`,
     
 }
 
@@ -28,6 +29,16 @@ export const CATEGORIES_URLS ={
 const BASE_RECIPIES = `${BASE_URL}/Recipe/`
 export const RCIPIES_URLS ={
     getlist: `${BASE_RECIPIES}`,
+    grtById:  (id: any)=> `${BASE_RECIPIES}/${id}`,
     delete: (id: any)=> `${BASE_RECIPIES}/${id}`,
+    update: (id: any)=> `${BASE_RECIPIES}/${id}`,
     addnewrecipie : `${BASE_RECIPIES}`,
+}
+
+
+const BASE_USER_RECIPIES = `${BASE_URL}/userRecipe/`
+export const USER_RECIPIES_URLS ={
+    getlist: `${BASE_USER_RECIPIES}`,
+    addtofav : `${BASE_USER_RECIPIES}`,
+    delete: (id: any)=> `${BASE_USER_RECIPIES}/${id}`,
 }

@@ -26,12 +26,20 @@ text-decoration: none;
 
 
 
+.favimg img{
+height: 50vmin;
+}
+
 
 
 .sidebarcontainer .ps-sidebar-container{
-    height: 100vh;
+
     background-color: #1F263E;
+height: 100vmax;
 }
+
+
+
 
 .sidebarcontainer .css-1t8x7v1:hover{
     
@@ -77,8 +85,8 @@ background-color: transparent !important;
 
 
 .headercontainer{
-   margin-top: 2rem;
-    width: 95%;
+   margin-top: 1rem;
+
     color: white;
 }
 .headerbg{
@@ -96,7 +104,7 @@ background-color: transparent !important;
 }
 
 .img-list{
-    width: 50px;
+    width: 50px; height: 30px;
 }
 
 
@@ -110,4 +118,12 @@ background-color: transparent !important;
     background-color: rgba(240, 255, 239, 1);
     border-radius: 10px;
 
+  }
+
+  .table thead {
+    background-color: #f5f5f5;
+    color: #333;
+  }
+  .table-header{
+    background-color: #3A3A3D;
   }

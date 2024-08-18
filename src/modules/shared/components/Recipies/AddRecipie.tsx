@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthorizedToken, CATEGORIES_URLS, RCIPIES_URLS } from '../../../../assets/CONSTANTS/END-POINTS.ts'
 import { FIELDVALIDATION } from '../../../../assets/CONSTANTS/VALIDATIONS'
@@ -8,6 +8,15 @@ import { toast } from 'react-toastify';
 
 
 export default function AddRecipie() {
+
+const location = useLocation();
+console.log(location);
+
+const status = location.state?.type ==='edit';
+const recipie = location.state?.AddRecipie;
+
+
+
   let navigate = useNavigate();
   const handleClick = () => {
     navigate('/dashboard/recipieslist'); 
@@ -31,10 +40,22 @@ export default function AddRecipie() {
         let onSubmit = async(data: any)=>{
           let recipieData = appendToFormData(data);
           try {
-            let response = await axios.post(RCIPIES_URLS.addnewrecipie, recipieData,AuthorizedToken
+            let response = await axios(
+              {
+                method: status ? 'put' : 'post',
+                url: status ? RCIPIES_URLS.update(recipie.id): RCIPIES_URLS.addnewrecipie,
+                data: recipieData,
+                headers: { Authorization: `Bearer ${localStorage.token}` }
+              }
             );
+
             console.log(response);
+            {
+            status?
+            toast.success('The recipie was updated successfully')
+            :
             toast.success('A new recipie was added successfully');
+            }
             navigate('/dashboard/recipieslist');
             } 
             catch (error:any) {
@@ -64,7 +85,7 @@ let getAllTags =async()=>{
   try {
     let response = await axios.get(RCIPIES_URLS.getlist,AuthorizedToken);
     setTagsList(response.data.data);
-  console.log(response.data.data);
+  
   } catch (error) {
     console.log(error);
   }
@@ -74,7 +95,7 @@ useEffect(() => {
 
   return () => {
   }
-}, [])
+}, []);
 
 
 
@@ -93,6 +114,7 @@ useEffect(() => {
           <input type="text" className="form-control" placeholder="Recipie Name"
            aria-label="name" aria-describedby="basic-addon1"
            {...register("name", FIELDVALIDATION)}
+          defaultValue={status? recipie.name : ""}
            />
         </div>
         {errors.name && <p className='alert alert-danger p-2'>{errors?.name?.message}</p>}
@@ -101,6 +123,7 @@ useEffect(() => {
         <div className="input-group mb-3">
             <select className="form-control" 
              {...register("tagId", FIELDVALIDATION)}
+
             >
             <option disabled>Choose a Tag</option>
       {tagsList.map((tag:any)=>(
@@ -116,6 +139,8 @@ useEffect(() => {
           <input type="number" className="form-control" placeholder="Price"
            aria-label="price" aria-describedby="basic-addon1"
            {...register("price", FIELDVALIDATION)}
+           defaultValue={status? recipie.price : ""}
+
            />
         </div>
         {errors.price && <p className='alert alert-danger p-2'>{errors?.price?.message}</p>}
@@ -123,7 +148,9 @@ useEffect(() => {
         <div className="input-group mb-3">
             <select className="form-control"
              {...register("categoriesIds", FIELDVALIDATION)}
+
             >
+
             <option disabled>Choose Category</option>
       {categoriesList.map((category:any)=>(
 
@@ -132,13 +159,14 @@ useEffect(() => {
             </select>  
         </div> 
         {errors.categoriesIds && <p className='alert alert-danger p-2'>{errors?.categoriesIds?.message}</p>}
-
+        
 
 
         <div className="input-group mb-3">
           <input type="text-area"  as="textarea" rows={3} className="form-control" placeholder="Description"
            aria-label="description" aria-describedby="basic-addon1"
            {...register("description", FIELDVALIDATION)}
+           defaultValue={status? recipie.description : ""}
            />
         </div>
         {errors.description && <p className='alert alert-danger p-2'>{errors?.description?.message}</p>}
@@ -147,6 +175,7 @@ useEffect(() => {
         <div className="mb-3">
   <input className="form-control" type="file" id="formFile"
       {...register("recipeImage", FIELDVALIDATION)}
+    
       />
 </div>
 {errors.recipeImage && <p className='alert alert-danger p-2'>{errors?.recipeImage?.message}</p>}

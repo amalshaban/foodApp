@@ -10,9 +10,11 @@ export default function Favourites() {
     const [favList, setFavList] = useState([]);
     
 
-let getFavList =async()=>{
+let getFavList =async(pageSize: number)=>{
     try {
-      let response = await axios.get(USER_RECIPIES_URLS.getlist,AuthorizedToken);
+      let response = await axios.get(USER_RECIPIES_URLS.getlist,
+       { headers: { Authorization: `Bearer ${localStorage.token}` },
+       params: {pageSize: pageSize}});
         
         console.log(response.data.data);
         setFavList(response.data.data);
@@ -21,7 +23,7 @@ let getFavList =async()=>{
     }
   }
   useEffect(() => {
-    getFavList();
+    getFavList(10);
   }, [])
   
   

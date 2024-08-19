@@ -1,5 +1,8 @@
 
 export default function Header({title, discribtion , imgurl}) {
+  
+    
+  
   return (
     <div className=" headercontainer mx-auto">
     <div className="container headerbg px-4 py-1">

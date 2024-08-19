@@ -4,11 +4,7 @@ import headerbg from "../../../../assets/imgs/Group48102098.png"
 import { Link } from 'react-router-dom'
 
 export default function Home() {
-  interface MyObject {
-    title: string;
-    description: string; 
-    imgurl:string;
-  }
+ 
   return (
     <div className=''>
       <Header 

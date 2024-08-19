@@ -1,5 +1,5 @@
 
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, createHashRouter, RouterProvider } from 'react-router-dom'
 import './App.css'
 import AuthLayout from './modules/shared/components/AuthLayout/AuthLayout'
 import NotFound from './modules/shared/components/NotFound/NotFound'
@@ -20,7 +20,7 @@ import VerifyAccount from './modules/Authnotication/components/VerifyAccount/Ver
 import Favourites from './modules/shared/components/Favourites/Favourites'
 
 function App() {
-const routes = createBrowserRouter([
+const routes = createHashRouter([
   {
       path:'',
       element:<AuthLayout/>,

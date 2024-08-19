@@ -9,6 +9,7 @@ import DeleteConfirmation from '../DeleteConfirmation/DeleteConfirmation';
 import { toast } from 'react-toastify';
 import NoData from '../NoData/NoData';
 import { useForm } from 'react-hook-form';
+import { format } from 'date-fns';
 
 
 
@@ -159,7 +160,7 @@ placeholder='search by name ...'/>
     
     <td>{category.id}</td>
     <td>{category.name}</td>
-    <td>{category.creationDate}</td>
+    <td>{format(category.creationDate, 'MMMM d, yyyy')}</td>
     
     <td>
     <i  onClick={()=>handleShow(category.id)} className="fa-solid fa-trash text-danger"></i>

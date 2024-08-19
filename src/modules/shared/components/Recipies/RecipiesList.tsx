@@ -12,6 +12,7 @@ import nodata from '../../../../assets/imgs/nodata.png'
 import { Link,  } from 'react-router-dom';
 import { AuthContext } from '../../../Authnotication/components/context/AuthContext';
 import AddRecipie from './AddRecipie';
+import { format } from 'date-fns';
 
 
 export default function RecipiesList() {
@@ -217,7 +218,7 @@ let getTagValue = (input) => {
     <td>{recipie.price}</td>
     <td>{recipie.description}</td>
     <td>{recipie.tag.name}</td>
-    <td>{recipie.modificationDate}</td>
+    <td>{format(recipie.modificationDate, 'MMMM d, yyyy')}</td>
     
     {loginData?.userGroup == "SuperAdmin"?(
     <td>

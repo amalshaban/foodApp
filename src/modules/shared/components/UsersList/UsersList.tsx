@@ -10,6 +10,7 @@ import NoData from '../NoData/NoData';
 import usersListbg from '../../../../assets/imgs/Group48102127.png'
 import nodata from '../../../../assets/imgs/nodata.png'
 
+import { format } from 'date-fns';
 
 export default function UsersList() {
 
@@ -51,6 +52,24 @@ useEffect(() => {
   }
 }, [])
 
+const range = (start: number, end: number, step = 1) => {
+  let output = [];
+  if (typeof end === 'undefined') {
+    end = start;
+    start = 0;
+  }
+  for (let i = start; i < end; i += step) {
+    output.push(i);
+  }
+  return output;
+};
+const paginate =(totalNoOfPages, pageNo)=>{
+  if(pageNo+5 > totalNoOfPages){
+    return range(totalNoOfPages-4,totalNoOfPages+1)
+  }
+  return range(pageNo,pageNo+5);
+}
+// console.log(paginate(arrayOfPages.length,30));
 
 
 let deleteUser = async () =>{
@@ -166,7 +185,7 @@ let getNameValue = (input) => {
       }
    </td>
    
-    <td>{user.creationDate}</td>
+    <td>{format(user.creationDate, 'MMMM d, yyyy')}</td>
     
     <td>
     <i 
@@ -186,17 +205,18 @@ let getNameValue = (input) => {
  <nav aria-label=" example">
   <ul className="pagination">
 
-    <li className="page-item"><a className="page-link" href="#">Previous</a></li>
     {arrayOfPages.map((pageNo:any)=>(
 
 <li key={pageNo} onClick={() =>getUsersList(pageNo,2,"","","")} className="page-item">
-  <a  className="page-link" href="#">
+
+
+  <a className="page-link" href="#">
     {pageNo}
     </a>
   </li>
     ))}
 
-    <li className="page-item"><a className="page-link" href="#">Next</a></li>
+
   </ul>
 </nav>
  

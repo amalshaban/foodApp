@@ -1,5 +1,5 @@
 
-import { createBrowserRouter, createHashRouter, RouterProvider } from 'react-router-dom'
+import {  createHashRouter, RouterProvider } from 'react-router-dom'
 import './App.css'
 import AuthLayout from './modules/shared/components/AuthLayout/AuthLayout'
 import NotFound from './modules/shared/components/NotFound/NotFound'

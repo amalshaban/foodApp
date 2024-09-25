@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import {USERS_URLS} from '../../../../assets/CONSTANTS/END-POINTS.ts'
 import { EMAILVALIDATION, FIELDVALIDATION, PASSWORDVALIDATION } from '../../../../assets/CONSTANTS/VALIDATIONS.ts'
 export default function Register() {
-  
+    
 let navigate= useNavigate();
 let{
   register,
@@ -36,7 +36,6 @@ let onSubmit = async (data:any)=>{
   let registerData = appendToFormData(data);
   try {
     let response = await axios.post(USERS_URLS.register, registerData);
-    console.log(response);
 
     toast.success(response.data.message);
      navigate('/verifyaccount');

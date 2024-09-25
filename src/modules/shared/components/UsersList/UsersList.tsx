@@ -205,6 +205,7 @@ let getNameValue = (input) => {
  <nav aria-label=" example">
   <ul className="pagination">
 
+  <li><a className="page-link" href="#">Next</a></li>
     {arrayOfPages.map((pageNo:any)=>(
 
 <li key={pageNo} onClick={() =>getUsersList(pageNo,2,"","","")} className="page-item">
@@ -217,6 +218,7 @@ let getNameValue = (input) => {
     ))}
 
 
+<li className="page-item"><a className="page-link" href="#">Next</a></li>
   </ul>
 </nav>
  

@@ -16,7 +16,7 @@ import { format } from 'date-fns';
 export default function Categories() {
 
   const [arrayOfPages, setArrayOfPages] = useState([]);
-  let{
+  const{
     register,
     setValue,
     handleSubmit,
@@ -111,7 +111,7 @@ let updateCategory = async (data:object)=>{
   }
 }
 const [nameValue, setNameValue] = useState("")
-let getNameValue = (input:any) => {
+const getNameValue = (input:any) => {
 setNameValue(input.target.value);
 getCategoriesList(1,2,nameValue);
 }

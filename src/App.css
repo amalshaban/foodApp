@@ -1,5 +1,5 @@
 .containerImg{
-    background-image: url('../../FoodApp/src/assets/imgs/authBg.png');
+    background-image: url('../src/modules/Authnotication/components/authBg.svg');
     background-size: cover;
 }
 .bg-overlay{

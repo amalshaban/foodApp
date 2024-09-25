@@ -32,10 +32,10 @@ data?.profileImage && formData.append('profileImage', data.profileImage[0])
 
 
 
-let onSubmit = async (data:any)=>{
-  let registerData = appendToFormData(data);
+const onSubmit = async (data:any)=>{
+  const registerData = appendToFormData(data);
   try {
-    let response = await axios.post(USERS_URLS.register, registerData);
+    const response = await axios.post(USERS_URLS.register, registerData);
 
     toast.success(response.data.message);
      navigate('/verifyaccount');
